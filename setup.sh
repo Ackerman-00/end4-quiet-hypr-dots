@@ -28,7 +28,7 @@ if [[ ! -d "$CLONE_DIR" ]]; then
     echo "Clone complete."
 fi
 
-cd "$CLONE_DIR" || { echo "Failed to enter $CLONE_DIR"; exit 1; }
+cd "$CLONE_DIR/pikaos" || { echo "Failed to enter $CLONE_DIR/pikaos"; exit 1; }
 
 chmod +x pika.sh
 bash pika.sh
