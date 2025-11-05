@@ -4,8 +4,8 @@ if [[ "$EUID" -eq 0 ]]; then echo "Do not run this script with sudo."; exit 1; f
 
 set -e
 
-REPO_URL="https://github.com/Ackerman-00/quiet-end-4-hyprland.git"
-CLONE_DIR="$HOME/.cache/quiet-end-4-hyprland"
+REPO_URL="https://github.com/Ackerman-00/end4-quiet-hypr-dots.git"
+CLONE_DIR="$HOME/.cache/end4-quiet-hypr-dots"
 BRANCH="main"
 
 echo "Cloning Quiet End 4 Hyprland dotfiles for PikaOS (branch: $BRANCH)..."
@@ -24,12 +24,11 @@ fi
 
 # Clone if directory is missing
 if [[ ! -d "$CLONE_DIR" ]]; then
-    git clone --depth=1 --branch "$BRANCH" "$REPO_URL" "$CLONE_DIR" --recurse-submodules
+    git clone --depth=1 --branch "$BRANCH" "$REPO_URL" "$CLONE_DIR"
     echo "Clone complete."
 fi
 
 cd "$CLONE_DIR" || { echo "Failed to enter $CLONE_DIR"; exit 1; }
-
 
 chmod +x pika.sh
 bash pika.sh
