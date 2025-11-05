@@ -20,12 +20,36 @@ sudo apt install cmake clang ninja-build meson pkg-config -y
 sudo apt install python3 python3-dev python3-pip -y
 sudo apt install unzip hypridle libsoup-3.0-dev -y
 
-# Hyprland and related packages
+# Install pugixml development files (available under different name)
+sudo apt install -y libpugixml-dev
+
+# Build and install hyprpicker manually FIRST (since hyprshot, sunset etc depend on it)
+echo "Building and installing hyprpicker from source..."
+HYPRPICKER_DIR="$HOME/.local/src/hyprpicker"
+if [ -d "$HYPRPICKER_DIR" ]; then
+    cd "$HYPRPICKER_DIR" && git pull || true
+else
+    git clone --depth=1 https://github.com/hyprwm/hyprpicker.git "$HYPRPICKER_DIR"
+fi
+
+cd "$HYPRPICKER_DIR"
+
+# Install build dependencies for hyprpicker
+sudo apt install -y cmake git meson ninja-build wayland-protocols \
+    libcairo2-dev libxkbcommon-dev libwayland-dev \
+    libgl-dev libjpeg-turbo-dev libpango1.0-dev xorgproto
+
+# Build and install hyprpicker
+cmake -B build -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr
+sudo cmake --build build --target install
+echo "✅ hyprpicker installed"
+
+# Hyprland and related packages (now without hyprpicker and pugixml)
 sudo apt install hyprland -y
-sudo apt install hyprpicker hyprlock wlogout pugixml -y
+sudo apt install hyprlock wlogout -y
 sudo apt install libhyprutils cliphist hyprwayland-scanner libhyprlang-dev -y
 
-# Install Hyprshot manually
+# Install Hyprshot manually (now hyprpicker is available)
 echo "Installing Hyprshot..."
 HYPRSHOT_DIR="$HOME/.local/src/hyprshot"
 if [ -d "$HYPRSHOT_DIR" ]; then
