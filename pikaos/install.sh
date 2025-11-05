@@ -77,7 +77,7 @@ echo "✅ hyprsunset installed"
 
 # GUI and toolkit dependencies
 sudo apt install libgtk-4-dev libadwaita-1-dev -y
-sudo apt install libgtk-layer-shell-dev libgtk4-layer-shell-dev gtk3 libgtksourceview-3.0-1 libgtksourceview-3.0-dev gobject-introspection upower -y
+sudo apt install libgtk-layer-shell-dev libgtk4-layer-shell-dev libgtksourceview-3.0-1 libgtksourceview-3.0-dev gobject-introspection upower -y
 sudo apt install libgtksourceviewmm-3.0-dev -y
 sudo apt install webp-pixbuf-loader -y
 sudo apt install libgirepository-1.0-dev libgjs-dev libpulse-dev -y
