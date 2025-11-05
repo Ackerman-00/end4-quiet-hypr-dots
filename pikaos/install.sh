@@ -21,7 +21,7 @@ sudo apt install python3 python3-dev python3-pip -y
 sudo apt install unzip hypridle libsoup-3.0-dev -y
 
 # Install pugixml development files (available under different name)
-sudo apt install -y libpugixml-dev libhyprwayland-scanner-dev
+sudo apt install -y libpugixml-dev libhyprwayland-scanner-dev hyprland-protocols
 
 # Build and install hyprpicker manually FIRST (since hyprshot, sunset etc depend on it)
 echo "Building and installing hyprpicker from source..."
