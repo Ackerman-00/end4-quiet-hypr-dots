@@ -30,7 +30,7 @@
 
    - _If you're new to Linux and decide to use Hyprland, you're in for a tough ride._
    - Just run `curl -LJO https://raw.githubusercontent.com/Ackerman-00/end4-quiet-hypr-dots/main/setup.sh`
-     - Or, clone this repo and run `./setup install`
+     - Or, clone this repo and run `./setup.sh`
      - See [document](https://ii.clsty.link/en/ii-qs/01setup/) for details.
    - **Default keybinds**: Should be somewhat familiar to Windows or GNOME users. Important ones:
      - `Super`+`/` = keybind list
@@ -101,11 +101,6 @@ Widget system: Quickshell | Support: Yes
     <h2>• stonks •</h2>
     <h3></h3>
 </div>
-
-- If you would like to give me some milk😳 (i dont drink coffee): https://github.com/sponsors/end-4
-- Virtual tentacle cat website points chart
-
-[![Stargazers over time](https://starchart.cc/end-4/dots-hyprland.svg?variant=adaptive)](https://starchart.cc/end-4/dots-hyprland)
 
 
 <div align="center">
