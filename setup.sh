@@ -24,11 +24,18 @@ fi
 
 # Clone if directory is missing
 if [[ ! -d "$CLONE_DIR" ]]; then
-    git clone --depth=1 --branch "$BRANCH" "$REPO_URL" "$CLONE_DIR" --recurse-submodules
+    git clone --depth=1 --branch "$BRANCH" "$REPO_URL" "$CLONE_DIR"
     echo "Clone complete."
 fi
 
-cd "$CLONE_DIR" || { echo "Failed to enter $CLONE_DIR"; exit 1; }
-
-chmod +x pikaos/pika.sh
-bash pikaos/pika.sh
+# Check if pikaos directory exists and navigate to it
+if [[ -d "$CLONE_DIR/pikaos" ]]; then
+    cd "$CLONE_DIR/pikaos" || { echo "Failed to enter $CLONE_DIR/pikaos"; exit 1; }
+    chmod +x pika.sh
+    bash pika.sh
+else
+    echo "ERROR: pikaos directory not found in the repository!"
+    echo "Available directories in the repo:"
+    ls -la "$CLONE_DIR"
+    exit 1
+fi
