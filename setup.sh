@@ -30,5 +30,5 @@ fi
 
 cd "$CLONE_DIR" || { echo "Failed to enter $CLONE_DIR"; exit 1; }
 
-chmod +x pika.sh
+chmod +x pikaos/pika.sh
 bash pika.sh
