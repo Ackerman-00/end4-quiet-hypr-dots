@@ -37,7 +37,7 @@ cd "$HYPRPICKER_DIR"
 # Install build dependencies for hyprpicker
 sudo apt install -y cmake git meson ninja-build wayland-protocols \
     libcairo2-dev libxkbcommon-dev libwayland-dev \
-    libgl-dev libjpeg62-turbo-dev libpango1.0-dev xserver-xorg-dev
+    libgl-dev libjpeg-turbo-dev libpango1.0-dev xorgproto
 
 # Build and install hyprpicker
 cmake -B build -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr
@@ -47,9 +47,9 @@ echo "✅ hyprpicker installed"
 # Hyprland and related packages (now without hyprpicker and pugixml)
 sudo apt install hyprland -y
 sudo apt install hyprlock wlogout -y
-sudo apt install libhyprutils cliphist hyprwayland-scanner libhyprlang-dev -y libhyprwayland-scanner-dev
+sudo apt install libhyprutils cliphist hyprwayland-scanner libhyprlang-dev -y
 
-# Install Hyprshot manually (now hyprpicker is available)
+# Install Hyprshot manually with proper user home directory
 echo "Installing Hyprshot..."
 HYPRSHOT_DIR="$HOME/.local/src/hyprshot"
 if [ -d "$HYPRSHOT_DIR" ]; then
@@ -57,6 +57,7 @@ if [ -d "$HYPRSHOT_DIR" ]; then
 else
     git clone --depth=1 https://github.com/Gustash/Hyprshot.git "$HYPRSHOT_DIR"
 fi
+mkdir -p "$HOME/.local/bin"
 cp "$HYPRSHOT_DIR/hyprshot" "$HOME/.local/bin/hyprshot"
 chmod +x "$HOME/.local/bin/hyprshot"
 echo "✅ Hyprshot installed"
@@ -110,16 +111,26 @@ sudo apt install libxdp-dev libxdp libportal-dev -y
 # Screenshot and screen recording tools
 sudo apt install swappy grim tesseract-ocr slurp wf-recorder -y
 
-# Install grimblast manually
-echo "Installing grimblast..."
+# Install grimblast professionally (converted from AUR PKGBUILD) [citation:1]
+echo "Building and installing grimblast..."
 GRIMBLAST_DIR="$HOME/.local/src/grimblast"
 if [ -d "$GRIMBLAST_DIR" ]; then
     cd "$GRIMBLAST_DIR" && git pull || true
 else
     git clone --depth=1 https://github.com/hyprwm/contrib.git "$GRIMBLAST_DIR"
 fi
-cp "$GRIMBLAST_DIR/grimblast/grimblast" "$HOME/.local/bin/grimblast"
-chmod +x "$HOME/.local/bin/grimblast"
+
+cd "$GRIMBLAST_DIR/grimblast"
+
+# Build man page
+if command -v scdoc >/dev/null 2>&1; then
+    scdoc < grimblast.1.scd > grimblast.1
+    sudo mkdir -p /usr/share/man/man1
+    sudo install -Dm 644 grimblast.1 /usr/share/man/man1/grimblast.1
+fi
+
+# Install grimblast binary
+sudo install -Dm 755 grimblast /usr/bin/grimblast
 echo "✅ grimblast installed"
 
 # AppStream and web libs
@@ -128,8 +139,9 @@ sudo apt install appstream-util libsoup-3.0-dev uv -y
 # Power tools
 sudo apt install make -y
 
-# Quickshell and Plasma dependencies
+# Quickshell and Plasma dependencies with Qt6 development packages [citation:6]
 sudo apt install python3-opencv plasma-desktop plasma-nm kdialog bluedevil plasma-systemmonitor wtype matugen quickshell-git ffmpeg -y
+sudo apt install qt6-base-dev qt6-declarative-dev qt6-shadertools-dev -y
 
 # Install mpvpaper professionally
 echo "Building and installing mpvpaper..."
@@ -181,6 +193,17 @@ sudo cmake --build build --target install
 # Install Python package
 sudo python3 -m installer --destdir=/ dist/*.whl
 echo "✅ kde-material-you-colors installed"
+
+# Initialize and update git submodules for quickshell
+echo "Initializing quickshell submodules..."
+QUICKSHELL_CONFIG_DIR="$HOME/.config/quickshell"
+if [ -d "$QUICKSHELL_CONFIG_DIR" ]; then
+    cd "$QUICKSHELL_CONFIG_DIR"
+    if [ -f ".gitmodules" ]; then
+        git submodule update --init --recursive
+        echo "✅ Quickshell submodules updated"
+    fi
+fi
 
 # Upscayl installation
 read -rp "Do you want to install/Update Upscayl? (y/n): " choice
