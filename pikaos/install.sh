@@ -47,7 +47,7 @@ echo "✅ hyprpicker installed"
 # Hyprland and related packages (now without hyprpicker and pugixml)
 sudo apt install hyprland -y
 sudo apt install hyprlock wlogout -y
-sudo apt install libhyprutils cliphist hyprwayland-scanner libhyprlang-dev -y
+sudo apt install libhyprutils cliphist hyprwayland-scanner libhyprlang-dev -y libhyprwayland-scanner-dev
 
 # Install Hyprshot manually (now hyprpicker is available)
 echo "Installing Hyprshot..."
