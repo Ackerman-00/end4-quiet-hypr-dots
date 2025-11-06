@@ -113,7 +113,7 @@ sudo apt install --no-install-recommends libxdp-dev libportal-dev -y
 # Screenshot and screen recording tools
 sudo apt install --no-install-recommends swappy grim tesseract-ocr slurp wf-recorder -y
 
-# Install grimblast professionally (converted from AUR PKGBUILD) 
+# Install grimblast professionally (converted from AUR PKGBUILD) 
 echo "Building and installing grimblast..."
 GRIMBLAST_DIR="$HOME/.local/src/grimblast"
 if [ -d "$GRIMBLAST_DIR" ]; then
@@ -147,7 +147,7 @@ echo "✅ UV installed"
 # Power tools
 sudo apt install --no-install-recommends make -y
 
-# Quickshell and Plasma dependencies with Qt6 development packages 
+# Quickshell and Plasma dependencies with Qt6 development packages 
 sudo apt install --no-install-recommends python3-opencv plasma-desktop plasma-nm kdialog bluedevil plasma-systemmonitor wtype matugen quickshell-git ffmpeg -y
 sudo apt install --no-install-recommends qt6-base-dev qt6-declarative-dev qt6-shadertools-dev -y
 
@@ -202,7 +202,10 @@ pip3 install --break-system-packages materialyoucolor pywal
 python3 -m build --wheel --no-isolation
 
 # Build plasmoid & screenshot helper
-cmake -B build -S . -DINSTALL_PLASMOID=ON
+# 🌟 OUT-OF-THE-BOX FIX: Manually setting CMAKE_PREFIX_PATH="/usr" forces CMake to find 
+# the Plasma5Support module under the standard Debian/PikaOS KF6 installation paths 
+# (like /usr/lib/x86_64-linux-gnu/cmake), bypassing the previous pathing error.
+cmake -B build -S . -DINSTALL_PLASMOID=ON -D CMAKE_PREFIX_PATH="/usr"
 # The subsequent cmake build/install step should now succeed with KF6 packages
 sudo cmake --build build --target install
 
