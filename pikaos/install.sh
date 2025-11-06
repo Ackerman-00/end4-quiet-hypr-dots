@@ -34,10 +34,8 @@ fi
 
 cd "$HYPRPICKER_DIR"
 
-# Install build dependencies for hyprpicker
-sudo apt install --no-install-recommends -y cmake git meson ninja-build wayland-protocols \
-    libcairo2-dev libxkbcommon-dev libwayland-dev \
-    libgl-dev libjpeg-dev libpango1.0-dev xserver-xorg-dev
+# Install build dependencies for hyprpicker (FIXED: Combined into a single line to prevent "command not found" error)
+sudo apt install --no-install-recommends -y cmake git meson ninja-build wayland-protocols libcairo2-dev libxkbcommon-dev libwayland-dev libgl-dev libjpeg-dev libpango1.0-dev xserver-xorg-dev
 
 # Build and install hyprpicker
 cmake -B build -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr
@@ -195,9 +193,8 @@ cd "$KDE_MATERIAL_DIR"
 
 # FIX: Changed KF5 dependencies to KF6 because the project requested version 6.0.0.
 # The `Plasma5Support` error is due to missing KF6 development headers.
-sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext \
-    libkf6config-dev libkf6coreaddons-dev libkf6i18n-dev libkf6plasma-dev \
-    libkf6package-dev libkf6kcmutils-dev -y
+# FIXED: Combined into a single line to prevent shell errors.
+sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext libkf6config-dev libkf6coreaddons-dev libkf6i18n-dev libkf6plasma-dev libkf6package-dev libkf6kcmutils-dev -y
 
 # Install Python dependencies
 sudo apt install --no-install-recommends python3-dbus python3-numpy python3-pil -y
