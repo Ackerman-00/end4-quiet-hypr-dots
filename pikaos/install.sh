@@ -110,7 +110,7 @@ sudo apt install --no-install-recommends gnome-themes-extra adw-gtk3-theme qt5ct
 sudo apt install --no-install-recommends fish kitty starship -y
 sudo apt install --no-install-recommends qt5-style-kvantum -y
 sudo apt install --no-install-recommends libkf6kcmutils-bin -y
-sudo apt install --no-install-recommends libxdp-dev libxdp libportal-dev -y
+sudo apt install --no-install-recommends libxdp-dev libportal-dev -y
 
 # Screenshot and screen recording tools
 sudo apt install --no-install-recommends swappy grim tesseract-ocr slurp wf-recorder -y
