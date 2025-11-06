@@ -58,7 +58,7 @@ else
     git clone --depth=1 https://github.com/Gustash/Hyprshot.git "$HYPRSHOT_DIR"
 fi
 mkdir -p "$HOME/.local/bin"
-cp "$HYPRSHOT_DIR/hyprshot" "$HOME/..local/bin/hyprshot"
+cp "$HYPRSHOT_DIR/hyprshot" "$HOME/.local/bin/hyprshot"  # FIXED: Removed extra dot
 chmod +x "$HOME/.local/bin/hyprshot"
 echo "✅ Hyprshot installed"
 
