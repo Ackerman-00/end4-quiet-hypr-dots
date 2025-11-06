@@ -202,10 +202,10 @@ pip3 install --break-system-packages materialyoucolor pywal
 python3 -m build --wheel --no-isolation
 
 # Build plasmoid & screenshot helper
-# 🌟 OUT-OF-THE-BOX FIX: Manually setting CMAKE_PREFIX_PATH="/usr" forces CMake to find 
-# the Plasma5Support module under the standard Debian/PikaOS KF6 installation paths 
-# (like /usr/lib/x86_64-linux-gnu/cmake), bypassing the previous pathing error.
-cmake -B build -S . -DINSTALL_PLASMOID=ON -D CMAKE_PREFIX_PATH="/usr"
+# 🎯 TARGETED FIX: The generic CMAKE_PREFIX_PATH="/usr" failed on PikaOS.
+# We are now setting the specific Plasma5Support_DIR variable to the full architecture path 
+# where KF6 configuration files are located on Debian-based systems.
+cmake -B build -S . -DINSTALL_PLASMOID=ON -D Plasma5Support_DIR="/usr/lib/x86_64-linux-gnu/cmake"
 # The subsequent cmake build/install step should now succeed with KF6 packages
 sudo cmake --build build --target install
 
