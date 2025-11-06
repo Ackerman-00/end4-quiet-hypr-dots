@@ -106,7 +106,7 @@ sudo apt install --no-install-recommends libtinyxml-dev libtinyxml2-dev -y
 sudo apt install --no-install-recommends libmagic-dev libwebp-dev libdrm-dev libgbm-dev libpam0g-dev libsass-dev -y
 
 # Theming and appearance
-sudo apt install --no-install-recommends gnome-themes-extra adw-gtk3-theme qt5ct qt6ct qt6-wayland qt5-wayland fontconfig fonts-jetbrains-mono fonts-symbola fonts-lato -y
+sudo apt install --no-install-recommends gnome-themes-extra adw-gtk3-theme qt5ct qt6ct qt6-wayland libqt5waylandclient5 fontconfig fonts-jetbrains-mono fonts-symbola fonts-lato -y
 sudo apt install --no-install-recommends fish kitty starship -y
 sudo apt install --no-install-recommends qt5-style-kvantum -y
 sudo apt install --no-install-recommends libkf6kcmutils-bin -y
