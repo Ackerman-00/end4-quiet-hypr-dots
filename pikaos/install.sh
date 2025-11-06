@@ -17,7 +17,7 @@ sudo apt install --no-install-recommends build-essential -y
 sudo apt install --no-install-recommends cmake clang ninja-build meson pkg-config -y
 
 # Python packages
-sudo apt install --no-install-recommends python3 python3-dev python3-pip -y
+sudo apt install --no-install-recommends python3 python3-dev python3-pip python3-full -y
 sudo apt install --no-install-recommends unzip hypridle libsoup-3.0-dev -y
 
 # Install pugixml development files (available under different name)
@@ -195,7 +195,7 @@ cd "$KDE_MATERIAL_DIR"
 
 # Install Python dependencies
 sudo apt install --no-install-recommends python3-dbus python3-numpy python3-pil -y
-pip3 install materialyoucolor pywal
+pip3 install --break-system-packages materialyoucolor pywal
 
 # Build backend
 python3 -m build --wheel --no-isolation
@@ -204,8 +204,8 @@ python3 -m build --wheel --no-isolation
 cmake -B build -S . -DINSTALL_PLASMOID=ON
 sudo cmake --build build --target install
 
-# Install Python package
-sudo python3 -m installer --destdir=/ dist/*.whl
+# Install Python package with --break-system-packages
+sudo python3 -m pip install --break-system-packages dist/*.whl
 echo "✅ kde-material-you-colors installed"
 
 # Initialize and update git submodules for quickshell
