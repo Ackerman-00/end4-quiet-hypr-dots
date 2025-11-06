@@ -191,10 +191,8 @@ else
 fi
 cd "$KDE_MATERIAL_DIR"
 
-# FIX: Changed KF5 dependencies to KF6 because the project requested version 6.0.0.
-# The `Plasma5Support` error is due to missing KF6 development headers.
-# FIXED: Combined into a single line to prevent shell errors.
-sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext libkf6config-dev libkf6coreaddons-dev libkf6i18n-dev libkf6plasma-dev libkf6package-dev libkf6kcmutils-dev -y
+# FIX: The package 'libkf6plasma-dev' is not available in the current repository, removing it to allow the build to proceed with core KF6 dependencies.
+sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext libkf6config-dev libkf6coreaddons-dev libkf6i18n-dev libkf6package-dev libkf6kcmutils-dev -y
 
 # Install Python dependencies
 sudo apt install --no-install-recommends python3-dbus python3-numpy python3-pil -y
