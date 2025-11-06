@@ -192,7 +192,7 @@ else
 fi
 cd "$KDE_MATERIAL_DIR"
 
-# 🎯 CRITICAL FIX: Replaced 'libkf6plasma-dev' with the correct Debian/PikaOS package name 'libplasma-dev'.
+# 🎯 CRITICAL FIX: The required KF6/Plasma 6 development packages.
 sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext libkf6config-dev libkf6coreaddons-dev libkf6i18n-dev libkf6package-dev libkf6kcmutils-dev libplasma-dev -y
 
 # Install Python dependencies
@@ -202,10 +202,12 @@ pip3 install --break-system-packages materialyoucolor pywal
 # Build backend
 python3 -m build --wheel --no-isolation
 
-# Build plasmoid & screenshot helper
-# We now rely on the newly installed libplasma-dev package to correctly configure CMake paths
-cmake -B build -S . -DINSTALL_PLASMOID=ON
-# The subsequent cmake build/install step should now succeed with KF6 packages
+# 💥 FIX: The previous CMake step failed because the project uses the deprecated 'Plasma5Support' module.
+# Since we are in a Hyprland environment, we skip the unnecessary Plasmoid compilation.
+rm -rf build # Clean up potentially corrupted build directory
+# Build the C++ screenshot helper and other components (without -DINSTALL_PLASMOID=ON)
+cmake -B build -S .
+# The subsequent cmake build/install step installs the remaining C++ utilities
 sudo cmake --build build --target install
 
 # Install Python package with --break-system-packages
