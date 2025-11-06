@@ -58,7 +58,7 @@ else
     git clone --depth=1 https://github.com/Gustash/Hyprshot.git "$HYPRSHOT_DIR"
 fi
 mkdir -p "$HOME/.local/bin"
-cp "$HYPRSHOT_DIR/hyprshot" "$HOME/.local/bin/hyprshot"
+cp "$HYPRSHOT_DIR/hyprshot" "$HOME/..local/bin/hyprshot"
 chmod +x "$HOME/.local/bin/hyprshot"
 echo "✅ Hyprshot installed"
 
@@ -138,7 +138,13 @@ sudo install -Dm 755 grimblast /usr/bin/grimblast
 echo "✅ grimblast installed"
 
 # AppStream and web libs
-sudo apt install --no-install-recommends appstream-util libsoup-3.0-dev uv -y
+sudo apt install --no-install-recommends appstream-util libsoup-3.0-dev -y
+
+# Install UV via pipx
+echo "Installing UV..."
+sudo apt install --no-install-recommends pipx python3-pip -y
+pipx install uv
+echo "✅ UV installed"
 
 # Power tools
 sudo apt install --no-install-recommends make -y
