@@ -193,6 +193,9 @@ else
 fi
 cd "$KDE_MATERIAL_DIR"
 
+# Install KDE development dependencies including ECM
+sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext libkf5config-dev libkf5coreaddons-dev libkf5i18n-dev libkf5plasma-dev libkf5package-dev -y
+
 # Install Python dependencies
 sudo apt install --no-install-recommends python3-dbus python3-numpy python3-pil -y
 pip3 install --break-system-packages materialyoucolor pywal
