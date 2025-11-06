@@ -58,7 +58,7 @@ else
     git clone --depth=1 https://github.com/Gustash/Hyprshot.git "$HYPRSHOT_DIR"
 fi
 mkdir -p "$HOME/.local/bin"
-cp "$HYPRSHOT_DIR/hyprshot" "$HOME/.local/bin/hyprshot"  # FIXED: Removed extra dot
+cp "$HYPRSHOT_DIR/hyprshot" "$HOME/.local/bin/hyprshot"
 chmod +x "$HOME/.local/bin/hyprshot"
 echo "✅ Hyprshot installed"
 
@@ -161,6 +161,10 @@ if [ -d "$MPVPAPER_DIR" ]; then
 else
     git clone --depth=1 https://github.com/GhostNaN/mpvpaper.git "$MPVPAPER_DIR"
 fi
+
+# Install mpv development dependencies
+sudo apt install --no-install-recommends libmpv-dev -y
+
 cd "$MPVPAPER_DIR"
 meson setup build --buildtype=release --prefix=/usr
 sudo meson install -C build
