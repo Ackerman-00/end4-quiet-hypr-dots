@@ -27,17 +27,17 @@ sudo apt install --no-install-recommends -y libpugixml-dev
 echo "Building and installing hyprpicker from source..."
 HYPRPICKER_DIR="$HOME/.local/src/hyprpicker"
 if [ -d "$HYPRPICKER_DIR" ]; then
-    cd "$HYPRPICKER_DIR" && git pull || true
+    cd "$HYPRPICKER_DIR" && git pull || true
 else
-    git clone --depth=1 https://github.com/hyprwm/hyprpicker.git "$HYPRPICKER_DIR"
+    git clone --depth=1 https://github.com/hyprwm/hyprpicker.git "$HYPRPICKER_DIR"
 fi
 
 cd "$HYPRPICKER_DIR"
 
 # Install build dependencies for hyprpicker
 sudo apt install --no-install-recommends -y cmake git meson ninja-build wayland-protocols \
-    libcairo2-dev libxkbcommon-dev libwayland-dev \
-    libgl-dev libjpeg-dev libpango1.0-dev xserver-xorg-dev
+    libcairo2-dev libxkbcommon-dev libwayland-dev \
+    libgl-dev libjpeg-dev libpango1.0-dev xserver-xorg-dev
 
 # Build and install hyprpicker
 cmake -B build -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr
@@ -53,9 +53,9 @@ sudo apt install --no-install-recommends libhyprutils cliphist hyprwayland-scann
 echo "Installing Hyprshot..."
 HYPRSHOT_DIR="$HOME/.local/src/hyprshot"
 if [ -d "$HYPRSHOT_DIR" ]; then
-    cd "$HYPRSHOT_DIR" && git pull || true
+    cd "$HYPRSHOT_DIR" && git pull || true
 else
-    git clone --depth=1 https://github.com/Gustash/Hyprshot.git "$HYPRSHOT_DIR"
+    git clone --depth=1 https://github.com/Gustash/Hyprshot.git "$HYPRSHOT_DIR"
 fi
 mkdir -p "$HOME/.local/bin"
 cp "$HYPRSHOT_DIR/hyprshot" "$HOME/.local/bin/hyprshot"
@@ -66,9 +66,9 @@ echo "✅ Hyprshot installed"
 echo "Building and installing hyprsunset..."
 HYPRSUNSET_DIR="$HOME/.local/src/hyprsunset"
 if [ -d "$HYPRSUNSET_DIR" ]; then
-    cd "$HYPRSUNSET_DIR" && git pull || true
+    cd "$HYPRSUNSET_DIR" && git pull || true
 else
-    git clone --depth=1 https://github.com/hyprwm/hyprsunset.git "$HYPRSUNSET_DIR"
+    git clone --depth=1 https://github.com/hyprwm/hyprsunset.git "$HYPRSUNSET_DIR"
 fi
 cd "$HYPRSUNSET_DIR"
 cmake -B build -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr
@@ -115,22 +115,22 @@ sudo apt install --no-install-recommends libxdp-dev libportal-dev -y
 # Screenshot and screen recording tools
 sudo apt install --no-install-recommends swappy grim tesseract-ocr slurp wf-recorder -y
 
-# Install grimblast professionally (converted from AUR PKGBUILD) 
+# Install grimblast professionally (converted from AUR PKGBUILD) 
 echo "Building and installing grimblast..."
 GRIMBLAST_DIR="$HOME/.local/src/grimblast"
 if [ -d "$GRIMBLAST_DIR" ]; then
-    cd "$GRIMBLAST_DIR" && git pull || true
+    cd "$GRIMBLAST_DIR" && git pull || true
 else
-    git clone --depth=1 https://github.com/hyprwm/contrib.git "$GRIMBLAST_DIR"
+    git clone --depth=1 https://github.com/hyprwm/contrib.git "$GRIMBLAST_DIR"
 fi
 
 cd "$GRIMBLAST_DIR/grimblast"
 
 # Build man page
 if command -v scdoc >/dev/null 2>&1; then
-    scdoc < grimblast.1.scd > grimblast.1
-    sudo mkdir -p /usr/share/man/man1
-    sudo install -Dm 644 grimblast.1 /usr/share/man/man1/grimblast.1
+    scdoc < grimblast.1.scd > grimblast.1
+    sudo mkdir -p /usr/share/man/man1
+    sudo install -Dm 644 grimblast.1 /usr/share/man/man1/grimblast.1
 fi
 
 # Install grimblast binary
@@ -149,7 +149,7 @@ echo "✅ UV installed"
 # Power tools
 sudo apt install --no-install-recommends make -y
 
-# Quickshell and Plasma dependencies with Qt6 development packages 
+# Quickshell and Plasma dependencies with Qt6 development packages 
 sudo apt install --no-install-recommends python3-opencv plasma-desktop plasma-nm kdialog bluedevil plasma-systemmonitor wtype matugen quickshell-git ffmpeg -y
 sudo apt install --no-install-recommends qt6-base-dev qt6-declarative-dev qt6-shadertools-dev -y
 
@@ -157,9 +157,9 @@ sudo apt install --no-install-recommends qt6-base-dev qt6-declarative-dev qt6-sh
 echo "Building and installing mpvpaper..."
 MPVPAPER_DIR="$HOME/.local/src/mpvpaper"
 if [ -d "$MPVPAPER_DIR" ]; then
-    cd "$MPVPAPER_DIR" && git pull || true
+    cd "$MPVPAPER_DIR" && git pull || true
 else
-    git clone --depth=1 https://github.com/GhostNaN/mpvpaper.git "$MPVPAPER_DIR"
+    git clone --depth=1 https://github.com/GhostNaN/mpvpaper.git "$MPVPAPER_DIR"
 fi
 
 # Install mpv development dependencies
@@ -174,9 +174,9 @@ echo "✅ mpvpaper installed"
 echo "Installing darkly theme..."
 DARKLY_DIR="$HOME/.local/src/darkly"
 if [ -d "$DARKLY_DIR" ]; then
-    cd "$DARKLY_DIR" && git pull || true
+    cd "$DARKLY_DIR" && git pull || true
 else
-    git clone --depth=1 https://github.com/Bali10050/darkly.git "$DARKLY_DIR"
+    git clone --depth=1 https://github.com/Bali10050/darkly.git "$DARKLY_DIR"
 fi
 cd "$DARKLY_DIR"
 mkdir -p "$HOME/.local/share/themes"
@@ -187,14 +187,17 @@ echo "✅ darkly theme installed"
 echo "Building and installing kde-material-you-colors..."
 KDE_MATERIAL_DIR="$HOME/.local/src/kde-material-you-colors"
 if [ -d "$KDE_MATERIAL_DIR" ]; then
-    cd "$KDE_MATERIAL_DIR" && git pull || true
+    cd "$KDE_MATERIAL_DIR" && git pull || true
 else
-    git clone --depth=1 https://github.com/luisbocanegra/kde-material-you-colors.git "$KDE_MATERIAL_DIR"
+    git clone --depth=1 https://github.com/luisbocanegra/kde-material-you-colors.git "$KDE_MATERIAL_DIR"
 fi
 cd "$KDE_MATERIAL_DIR"
 
-# Install KDE development dependencies including ECM
-sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext libkf5config-dev libkf5coreaddons-dev libkf5i18n-dev libkf5plasma-dev libkf5package-dev -y
+# FIX: Changed KF5 dependencies to KF6 because the project requested version 6.0.0.
+# The `Plasma5Support` error is due to missing KF6 development headers.
+sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext \
+    libkf6config-dev libkf6coreaddons-dev libkf6i18n-dev libkf6plasma-dev \
+    libkf6package-dev libkf6kcmutils-dev -y
 
 # Install Python dependencies
 sudo apt install --no-install-recommends python3-dbus python3-numpy python3-pil -y
@@ -205,6 +208,7 @@ python3 -m build --wheel --no-isolation
 
 # Build plasmoid & screenshot helper
 cmake -B build -S . -DINSTALL_PLASMOID=ON
+# The subsequent cmake build/install step should now succeed with KF6 packages
 sudo cmake --build build --target install
 
 # Install Python package with --break-system-packages
@@ -215,28 +219,28 @@ echo "✅ kde-material-you-colors installed"
 echo "Initializing quickshell submodules..."
 QUICKSHELL_CONFIG_DIR="$HOME/.config/quickshell"
 if [ -d "$QUICKSHELL_CONFIG_DIR" ]; then
-    cd "$QUICKSHELL_CONFIG_DIR"
-    if [ -f ".gitmodules" ]; then
-        git submodule update --init --recursive
-        echo "✅ Quickshell submodules updated"
-    fi
+    cd "$QUICKSHELL_CONFIG_DIR"
+    if [ -f ".gitmodules" ]; then
+        git submodule update --init --recursive
+        echo "✅ Quickshell submodules updated"
+    fi
 fi
 
 # Upscayl installation
 read -rp "Do you want to install/Update Upscayl? (y/n): " choice
 
 if [[ "$choice" =~ ^[Yy]$ ]]; then
-    cd "$t" || { echo "Directory $t not found"; exit 1; }
+    cd "$t" || { echo "Directory $t not found"; exit 1; }
 
-    url=$(curl -s https://api.github.com/repos/upscayl/upscayl/releases/latest \
-      | jq -r '.assets[] | select(.name | test("\\.deb$")) | .browser_download_url')
+    url=$(curl -s https://api.github.com/repos/upscayl/upscayl/releases/latest \
+      | jq -r '.assets[] | select(.name | test("\\.deb$")) | .browser_download_url')
 
-    wget "$url"
-    deb_file="${url##*/}"
-    sudo apt install --no-install-recommends -y "./$deb_file"
-    echo "✅ Upscayl installed"
+    wget "$url"
+    deb_file="${url##*/}"
+    sudo apt install --no-install-recommends -y "./$deb_file"
+    echo "✅ Upscayl installed"
 else
-    echo "Skipped Upscayl installation."
+    echo "Skipped Upscayl installation."
 fi
 
 # Cleanup
