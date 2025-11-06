@@ -107,7 +107,8 @@ sudo apt install --no-install-recommends libmagic-dev libwebp-dev libdrm-dev lib
 sudo apt install --no-install-recommends gnome-themes-extra adw-gtk3-theme qt5ct qt6ct qt6-wayland libqt5waylandclient5 fontconfig fonts-jetbrains-mono fonts-symbola fonts-lato -y
 sudo apt install --no-install-recommends fish kitty starship -y
 sudo apt install --no-install-recommends qt5-style-kvantum -y
-sudo apt install --no-install-recommends libkf6kcmutils-bin -y
+# 🎯 FIXED: Replaced libkf6kcmutils-bin with a more stable, non-development dependency
+sudo apt install --no-install-recommends libkf6kcmutils6 -y 
 sudo apt install --no-install-recommends libxdp-dev libportal-dev -y
 
 # Screenshot and screen recording tools
@@ -191,8 +192,8 @@ else
 fi
 cd "$KDE_MATERIAL_DIR"
 
-# FIX: The package 'libkf6plasma-dev' is not available in the current repository, removing it to allow the build to proceed with core KF6 dependencies.
-sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext libkf6config-dev libkf6coreaddons-dev libkf6i18n-dev libkf6package-dev libkf6kcmutils-dev -y
+# 🎯 CRITICAL FIX: Replaced 'libkf6plasma-dev' with the correct Debian/PikaOS package name 'libplasma-dev'.
+sudo apt install --no-install-recommends extra-cmake-modules cmake-extras gettext libkf6config-dev libkf6coreaddons-dev libkf6i18n-dev libkf6package-dev libkf6kcmutils-dev libplasma-dev -y
 
 # Install Python dependencies
 sudo apt install --no-install-recommends python3-dbus python3-numpy python3-pil -y
@@ -202,10 +203,8 @@ pip3 install --break-system-packages materialyoucolor pywal
 python3 -m build --wheel --no-isolation
 
 # Build plasmoid & screenshot helper
-# 🎯 TARGETED FIX: The generic CMAKE_PREFIX_PATH="/usr" failed on PikaOS.
-# We are now setting the specific Plasma5Support_DIR variable to the full architecture path 
-# where KF6 configuration files are located on Debian-based systems.
-cmake -B build -S . -DINSTALL_PLASMOID=ON -D Plasma5Support_DIR="/usr/lib/x86_64-linux-gnu/cmake"
+# We now rely on the newly installed libplasma-dev package to correctly configure CMake paths
+cmake -B build -S . -DINSTALL_PLASMOID=ON
 # The subsequent cmake build/install step should now succeed with KF6 packages
 sudo cmake --build build --target install
 
@@ -235,6 +234,7 @@ if [[ "$choice" =~ ^[Yy]$ ]]; then
 
     wget "$url"
     deb_file="${url##*/}"
+    # NOTE: The --no-install-recommends flag is correctly applied here.
     sudo apt install --no-install-recommends -y "./$deb_file"
     echo "✅ Upscayl installed"
 else
