@@ -37,7 +37,7 @@ cd "$HYPRPICKER_DIR"
 # Install build dependencies for hyprpicker
 sudo apt install --no-install-recommends -y cmake git meson ninja-build wayland-protocols \
     libcairo2-dev libxkbcommon-dev libwayland-dev \
-    libgl-dev libjpeg-turbo-dev libpango1.0-dev xorgproto
+    libgl-dev libjpeg-dev libpango1.0-dev xserver-xorg-dev
 
 # Build and install hyprpicker
 cmake -B build -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr
