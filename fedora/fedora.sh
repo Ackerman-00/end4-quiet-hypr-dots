@@ -12,10 +12,9 @@ NC='\033[0m' # No Color
 # Get directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Script paths - all relative to pikaos directory
+# Script paths
 INSTALL_SCRIPT="$SCRIPT_DIR/install.sh"
 FONTS_SCRIPT="$SCRIPT_DIR/fonts.sh"
-DOTS_DIR="../dots"  # dots is in parent directory relative to pikaos
 
 # Ask if user wants to exit
 ask_exit() {
@@ -45,15 +44,15 @@ run_script() {
 # Force copy of dotfiles (no exclusions)
 copy_dotfiles() {
     echo -e "${YELLOW}Copying dotfiles to ~/.config and ~/.local (no exclusions)...${NC}"
-    cp -Rf "$DOTS_DIR/.config/"* ~/.config/ || { echo -e "${RED}❌ Failed copying .config${NC}"; exit 1; }
-    cp -Rf "$DOTS_DIR/.local/"* ~/.local/ || { echo -e "${RED}❌ Failed copying .local${NC}"; exit 1; }
+    cp -Rf dots/.config/* ~/.config/ || { echo -e "${RED}❌ Failed copying .config${NC}"; exit 1; }
+    cp -Rf dots/.local/* ~/.local/ || { echo -e "${RED}❌ Failed copying .local${NC}"; exit 1; }
     echo -e "${GREEN}✅ Dotfiles copied successfully.${NC}"
 }
 
 # dotfiles copy (skip custom/user files if already present)
 copy_dotfiles_smart() {
     echo -e "${YELLOW}Copying dotfiles to ~/.config...${NC}"
-    
+
     mkdir -p ~/.config ~/.local
 
     RSYNC_EXCLUDES=()
@@ -61,11 +60,11 @@ copy_dotfiles_smart() {
     [[ -e ~/.config/hypr/hyprland.conf ]] && RSYNC_EXCLUDES+=(--exclude 'hypr/hyprland.conf')
     [[ -e ~/.config/kde-material-you-colors/config.conf ]] && RSYNC_EXCLUDES+=(--exclude 'kde-material-you-colors/config.conf')
     [[ -e ~/.config/hypr/hypridle.conf ]] && RSYNC_EXCLUDES+=(--exclude 'hypr/hypridle.conf')
-    
-    rsync -a "${RSYNC_EXCLUDES[@]}" "$DOTS_DIR/.config/" ~/.config/ \
+
+    rsync -a "${RSYNC_EXCLUDES[@]}" dots/.config/ ~/.config/ \
         || { echo -e "${RED}❌ Failed copying to ~/.config${NC}"; exit 1; }
 
-    rsync -a "$DOTS_DIR/.local/" ~/.local/ \
+    rsync -a dots/.local/ ~/.local/ \
         || { echo -e "${RED}❌ Failed copying to ~/.local${NC}"; exit 1; }
 
     fix_gtk_ownership || { echo -e "${RED}❌ Failed: fix_gtk_ownership${NC}"; exit 1; }
@@ -76,7 +75,7 @@ copy_dotfiles_smart() {
 # Full install: all scripts + dotfiles
 run_full_install() {
     echo -e "${YELLOW}Starting full installation...${NC}"
-    run_script "$INSTALL_SCRIPT" "sudo" || { echo -e "${RED}❌ Failed: $INSTALL_SCRIPT${NC}"; exit 1; }
+    run_script "$INSTALL_SCRIPT" sudo || { echo -e "${RED}❌ Failed: $INSTALL_SCRIPT${NC}"; exit 1; }
     run_script "$FONTS_SCRIPT" ""     || { echo -e "${RED}❌ Failed: $FONTS_SCRIPT${NC}"; exit 1; }
     copy_dotfiles_smart || { echo -e "${RED}❌ Failed: copy_dotfiles_smart${NC}"; exit 1; }
     fix_gtk_ownership || { echo -e "${RED}❌ Failed: fix_gtk_ownership${NC}"; exit 1; }
@@ -124,7 +123,7 @@ while true; do
     echo "6) Install/Update Fonts"
     echo ""
 
-    read -rp "Enter your choice [1-6]: " choice
+    read -rp "Enter your choice [1-7]: " choice
 
     case "$choice" in
         1)
@@ -140,7 +139,7 @@ while true; do
             ask_exit
             ;;
         4)
-            run_script "$INSTALL_SCRIPT" "sudo" || { echo -e "${RED}❌ Failed: $INSTALL_SCRIPT${NC}"; }
+            run_script "$INSTALL_SCRIPT" sudo || { echo -e "${RED}❌ Failed: $INSTALL_SCRIPT${NC}"; }
             ask_exit
             ;;
         5)
