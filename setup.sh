@@ -6,7 +6,7 @@ set -e
 
 REPO_URL="https://github.com/Ackerman-00/end4-quiet-hypr-dots.git"
 CLONE_DIR="$HOME/.cache/end4-quiet-hypr-dots"
-BRANCH="f43"
+BRANCH="main"
 
 echo "Cloning Fedora Hyprland dotfiles (branch: $BRANCH)..."
 
