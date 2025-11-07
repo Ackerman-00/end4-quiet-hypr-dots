@@ -4,11 +4,11 @@ if [[ "$EUID" -eq 0 ]]; then echo "Do not run this script with sudo."; exit 1; f
 
 set -e
 
-REPO_URL="https://github.com/Ackerman-00/end4-quiet-hypr-dots.git"
-CLONE_DIR="$HOME/.cache/end4-quiet-hypr-dots"
-BRANCH="main"
+REPO_URL="https://github.com/EisregenHaha/fedora-hyprland/"
+CLONE_DIR="$HOME/.cache/fedora-hyprland"
+BRANCH="f43"
 
-echo "Cloning Quiet End 4 Hyprland dotfiles for PikaOS (branch: $BRANCH)..."
+echo "Cloning Fedora Hyprland dotfiles (branch: $BRANCH)..."
 
 # If the directory exists, prompt reuse or delete
 if [[ -d "$CLONE_DIR" ]]; then
@@ -24,18 +24,11 @@ fi
 
 # Clone if directory is missing
 if [[ ! -d "$CLONE_DIR" ]]; then
-    git clone --depth=1 --branch "$BRANCH" "$REPO_URL" "$CLONE_DIR"
+    git clone --depth=1 --branch "$BRANCH" "$REPO_URL" "$CLONE_DIR" --recurse-submodules
     echo "Clone complete."
 fi
 
-# Check if pikaos directory exists and navigate to it
-if [[ -d "$CLONE_DIR/pikaos" ]]; then
-    cd "$CLONE_DIR/pikaos" || { echo "Failed to enter $CLONE_DIR/pikaos"; exit 1; }
-    chmod +x pika.sh
-    bash pika.sh
-else
-    echo "ERROR: pikaos directory not found in the repository!"
-    echo "Available directories in the repo:"
-    ls -la "$CLONE_DIR"
-    exit 1
-fi
+cd "$CLONE_DIR" || { echo "Failed to enter $CLONE_DIR"; exit 1; }
+
+chmod +x fedora/fedora.sh
+bash fedora/fedora.sh
