@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>【 end_4's Hyprland dotfiles for Pikaos 】</h1>
+    <h1>【 end_4's Hyprland dotfiles for Fedora 】</h1>
     <h3></h3>
 </div>
 
